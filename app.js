@@ -3,8 +3,15 @@ const datos = async () => {
 try {
     const request=await fetch("https://jsonplaceholder.typicode.com/posts");
     const res=await request.json();
-    // console.log(res)
+    renderData(res);  
+} catch (error) {
+    console.log(error)
+    
+}
+ };
+ datos()
 
+ function renderData(res) {
     const fragmento=document.createDocumentFragment();
     const main=document.querySelector('.container')
     res.forEach(element => {
@@ -12,7 +19,6 @@ try {
     const id=document.createElement('li');
     const title=document.createElement('h1');
     const body=document.createElement('p');
-    
     div.appendChild(id)
     div.appendChild(title)
     div.appendChild(body)
@@ -21,11 +27,5 @@ try {
     body.textContent=element.body
     fragmento.appendChild(div)   
     });
-
     main.appendChild(fragmento);
-} catch (error) {
-    console.log(error)
-    
-}
- };
- datos()
+ }
